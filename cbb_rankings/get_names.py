@@ -2,7 +2,7 @@ import re
 import urllib2
 import numpy as np
 
-url_open = urllib2.urlopen('http://www.sports-reference.com/cbb/seasons/2014-school-stats.html')
+url_open = urllib2.urlopen('http://www.sports-reference.com/cbb/seasons/2016-school-stats.html')
 url_text = url_open.read()
 
 
@@ -42,7 +42,7 @@ for j in range(n_teams):
             opponent[k] = team_results_text[opp_names_beg[k]:opp_names_end[k]-9]
         else:
             opponent[k] = team_results_text[opp_names_beg[k]:opp_names_end[k]-5]
-        opponent[k] = opponent[k].replace("&amp;","&")
+        opponent[k] = opponent[k].split('>', 1)[-1].split('<', 1)[0].replace("&amp;","&")
         win_loss_v[k] = team_results_text[win_loss[k]-7:win_loss[k]-6]
         #print k
         team_score[k,0] = team_results_text[team_score_beg[k]:team_score_end[k]-5]
